@@ -12,40 +12,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+!pip install streamlit
+!pip install inputmask
+
 import streamlit as st
-from streamlit.logger import get_logger
+from datetime import datetime, timedelta
+from inputmask import inputmask
 
-LOGGER = get_logger(__name__)
+def calcular_tempo_reserva(data_ingresso):
+    # Data de referência para a lei (17/12/2019)
+    data_referencia = datetime(2019, 12, 17)
 
+    # Calcular anos, meses e dias até a data de referência
+    diferenca = data_referencia - data_ingresso
+    anos_servico_atual = diferenca.days // 365
+    meses_servico_atual = (diferenca.days % 365) // 30
 
-def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
+    # Tempo de serviço atual
+    tempo_atual = timedelta(days=(anos_servico_atual * 365) + (meses_servico_atual * 30))
 
-    st.write("# Welcome to Streamlit! 👋")
+    # Verificar se está na regra de transição
+    if data_ingresso <= data_referencia:
+        # Se já tinha 30 anos de serviço até 17/12/2019, pode pedir a reserva a qualquer momento
+        if anos_servico_atual >= 30:
+            return timedelta(days=0)
+        else:
+            # Calcular o tempo que falta considerando o acréscimo de 17%
+            tempo_faltante = timedelta(days=((30 - anos_servico_atual) * 365 * 1.17))
+            return tempo_faltante - tempo_atual
+    else:
+        # Se entrou após 17/12/2019, precisa cumprir 35 anos de serviço
+        tempo_faltante = timedelta(days=(35 * 365))
+        return tempo_faltante - tempo_atual
 
-    st.sidebar.success("Select a demo above.")
+# Configurações da página
+st.title('Calculadora de Reserva Remunerada para Militares')
 
-    st.markdown(
-        """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
-    """
-    )
+# Solicitar a data de ingresso do usuário com máscara
+data_ingresso_str = st.text_input('Digite a data de ingresso (DD-MM-YYYY):')
+data_ingresso = datetime.strptime(data_ingresso_str, "%d-%m-%Y") if data_ingresso_str else None
 
-
-if __name__ == "__main__":
-    run()
+# Calcular o tempo de serviço restante
+if data_ingresso:
+    tempo_faltante = calcular_tempo_reserva(data_ingresso)
+    st.write(f"Tempo faltante para a reserva remunerada: {tempo_faltante.days} dias")
