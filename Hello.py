@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-!pip install streamlit
-!pip install inputmask
-
 import streamlit as st
 from datetime import datetime, timedelta
 from inputmask import inputmask
