@@ -9,10 +9,10 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         meses = (delta_tempo_servico.days % 365.25) / 30.44  # Usar 30.44 para considerar a média de dias por mês
         dias = (delta_tempo_servico.days % 365.25) % 30.44  # Usar 30.44 para considerar a média de dias por mês
 
-        # Calcular a data futura de reserva remunerada
-        data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 35 - anos_extras)
+       # Calcular a data futura de reserva remunerada considerando anos extras
+        data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 35) - timedelta(days=365.25 * anos_extras)
 
-        # Criar uma contagem regressiva para a futura reserva
+        # Criar uma contagem regressiva para a futura reserva considerando anos extras
         hoje = datetime.now()
         tempo_restante = (data_reserva_remunerada - hoje)
         anos_restantes = int(tempo_restante.days / 365.25)
