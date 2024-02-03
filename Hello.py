@@ -10,12 +10,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         dias = (delta_tempo_servico.days % 365.25) % 30.44  # Usar 30.44 para considerar a média de dias por mês
 
         # Calcular a data futura de reserva remunerada
-        data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 30 - anos_extras)
+        data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 35 - anos_extras)
 
         # Criar uma contagem regressiva para a futura reserva
         hoje = datetime.now()
         tempo_restante = (data_reserva_remunerada - hoje)
-        percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
         anos_restantes = int(tempo_restante.days / 365.25)
         meses_restantes = int((tempo_restante.days % 365.25) / 30.44)
         dias_restantes = int((tempo_restante.days % 365.25) % 30.44)
@@ -23,11 +22,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         minutos_restantes, _ = divmod(resto_horas, 60)
 
         # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-        normalized_percent_tempo_restante = percent_tempo_restante / 100.0
+        percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (35 * 365 * 24 * 3600)) * 100)
 
         # Exibir barra de progresso
         st.markdown("Contagem regressiva para a reserva:")
-        st.progress(normalized_percent_tempo_restante)
+        st.progress(percent_tempo_restante / 100.0)
 
         # Exibir texto de sucesso
         st.success(
