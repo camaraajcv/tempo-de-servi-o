@@ -1,7 +1,5 @@
 import streamlit as st
 from datetime import datetime, date, timedelta
-# Configuração da página para ocultar a barra lateral
-st.set_page_config(layout="wide", page_title="Seu Aplicativo Streamlit", sidebar="none")
 
 def calcular_tempo_servico(data_ingresso, data_lei):
     # Tempo de serviço antes da lei
@@ -122,6 +120,14 @@ def calcular_data_futura_reserva(data_ingresso, anos_futura_reserva):
     return data_reserva_remunerada
 
 def main():
+    st.markdown(
+    """
+    <style>
+        .sidebar { display: none; }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
     st.title("Calculadora de Tempo de Serviço nas FFAA")
 
     # Adicionar explicação sobre as regras
