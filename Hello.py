@@ -196,7 +196,7 @@ def main():
     data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1970, 1, 1))
 
     # Informar anos extras desejados
-    anos_extras = st.number_input("Informe os anos extras a serem averbados:", min_value=0, max_value=10, step=1, value=0)
+    anos_extras = st.number_input("Informe os anos extras a serem averbados caso possua algum tempo de serviço anterior a data de ingresso:", min_value=0, max_value=10, step=1, value=0)
 
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
