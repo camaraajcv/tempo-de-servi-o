@@ -125,15 +125,15 @@ def calcular_data_futura_reserva(data_ingresso, anos_futura_reserva):
 
 def main():
     st.set_page_config(
-        page_title="Tempo de Serviço",
+        page_title="Tempo para Reserva",
         page_icon="🧊",
         initial_sidebar_state="collapsed",
     )
-    st.title("Calculadora de Tempo de Serviço nas FFAA")
+    st.title("Calculadora de Tempo para Reserva nas FFAA")
 
     # Adicionar explicação sobre as regras
     st.markdown(
-        "Este aplicativo calcula o tempo de serviço nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
+        "Este aplicativo calcula o tempo que falta para a reserva remunerada nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
         "Selecione a data de ingresso e clique no botão 'Calcular' para obter o resultado."
     )
     
