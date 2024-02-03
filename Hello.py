@@ -83,13 +83,13 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
 
             # Exibir barra de progresso invertida
-            st.markdown("Contagem regressiva para a reserva:")
+            st.markdown("Progresso tempo de serviço para a reserva:")
             st.progress(normalized_percent_tempo_restante)
 
             # Exibir texto de sucesso
             st.success(
                 f"**Data futura de reserva remunerada:** {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
-                f"**Progresso do tempo de serviço para a reserva:** {anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos."
+                f"**Contagem regressiva para a reserva:** {anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos."
             )
 
             return (
