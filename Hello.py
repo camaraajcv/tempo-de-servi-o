@@ -53,7 +53,7 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             f"</li>"
             f"<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
             f"</ol>"
-            f"<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
+            
         )
 
     else:
@@ -110,7 +110,7 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
                 "</li>"
                 "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
                 "</ol>"
-                "<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
+                
             )
         else:
             # Tempo de serviço após a lei
@@ -164,7 +164,7 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
                 "</li>"
                 "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
                 "</ol>"
-                "<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
+                
             )
 
 def calcular_data_futura_reserva(data_ingresso, anos_futura_reserva):
