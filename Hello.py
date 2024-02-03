@@ -22,12 +22,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         minutos_restantes, _ = divmod(resto_horas, 60)
 
         # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-        percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (35 * 365 * 24 * 3600)) * 100)
-        normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
+        percent_tempo_restante = min(100, max(0, (tempo_restante.total_seconds() / (35 * 365 * 24 * 3600)) * 100))
 
         # Exibir barra de progresso invertida
         st.markdown("Contagem regressiva para a reserva:")
-        st.progress(normalized_percent_tempo_restante)
+        st.progress(1.0 - percent_tempo_restante / 100.0)
 
         # Exibir texto de sucesso
         st.success(
@@ -67,12 +66,12 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             tempo_faltante = 30 - anos_antes_lei
             tempo_transicao = tempo_faltante * 0.17
             # Calcular a data futura de reserva remunerada
-            data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 30 + tempo_transicao) - timedelta(days=365.25 * anos_extras)
+            data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 30 + tempo_transicao)
 
             # Criar uma contagem regressiva para a futura reserva
             hoje = datetime.now()
             tempo_restante = (data_reserva_remunerada - hoje)
-            percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
+            percent_tempo_restante = min(100, max(0, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100))  # Limitar a 100%
             anos_restantes = int(tempo_restante.days / 365.25)
             meses_restantes = int((tempo_restante.days % 365.25) / 30.44)
             dias_restantes = int((tempo_restante.days % 365.25) % 30.44)
@@ -80,11 +79,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             minutos_restantes, _ = divmod(resto_horas, 60)
 
             # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-            normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
+            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
 
             # Exibir barra de progresso invertida
-            st.markdown("Progresso tempo de serviço para a reserva:")
-            st.progress(normalized_percent_tempo_restante)
+            st.markdown("Contagem regressiva para a reserva:")
+            st.progress(1.0 - normalized_percent_tempo_restante)
 
             # Exibir texto de sucesso
             st.success(
@@ -126,7 +125,7 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             # Criar uma contagem regressiva para a futura reserva
             hoje = datetime.now()
             tempo_restante = (data_reserva_remunerada - hoje)
-            percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (35 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
+            percent_tempo_restante = min(100, max(0, (tempo_restante.total_seconds() / (35 * 365 * 24 * 3600)) * 100))  # Limitar a 100%
             anos_restantes = int(tempo_restante.days / 365.25)
             meses_restantes = int((tempo_restante.days % 365.25) / 30.44)
             dias_restantes = int((tempo_restante.days % 365.25) % 30.44)
@@ -134,11 +133,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             minutos_restantes, _ = divmod(resto_horas, 60)
 
             # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-            normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
+            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
 
             # Exibir barra de progresso invertida
             st.markdown("Contagem regressiva para a reserva:")
-            st.progress(normalized_percent_tempo_restante)
+            st.progress(1.0 - normalized_percent_tempo_restante)
 
             # Exibir texto de sucesso
             st.success(
