@@ -1,8 +1,5 @@
 import streamlit as st
 from datetime import datetime, date, timedelta
-from babel.dates import format_date, format_datetime, format_time
-
-
 
 def calcular_tempo_servico(data_ingresso, data_lei):
     # Tempo de serviço antes da lei
@@ -20,17 +17,19 @@ def calcular_tempo_servico(data_ingresso, data_lei):
             # Criar uma contagem regressiva para a futura reserva
             hoje = datetime.now()
             tempo_restante = (data_reserva_remunerada - hoje)
-            dias_restantes = tempo_restante.days
+            percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
+            dias_restantes = int(tempo_restante.days)
             horas_restantes, resto_horas = divmod(tempo_restante.seconds, 3600)
             minutos_restantes, _ = divmod(resto_horas, 60)
 
-            # Exibir resultado dentro de st.write
-            st.write(
-                f"<p><strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
-                f"<strong>Contagem regressiva para a reserva:</strong> {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>",
-                unsafe_allow_html=True
-            )
+            # Normalizar a porcentagem para um valor entre 0.0 e 1.0
+            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
 
+            # Exibir contagem regressiva para a futura reserva
+            st.markdown("Contagem regressiva para a reserva:")
+            st.progress(normalized_percent_tempo_restante)
+            st.success(f"**{dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.**")
+            st.success(f"**Data futura de reserva remunerada:** {data_reserva_remunerada.strftime('%d/%m/%Y')}. ")
             return (
                 "<p><strong>Nova regra da reserva remunerada</strong></p>"
                 "<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
@@ -51,6 +50,9 @@ def calcular_tempo_servico(data_ingresso, data_lei):
                 "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
                 "</ol>"
                 "<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
+                "<p>Para os militares ativos que pretendem entrar na reserva remunerada, há uma regra de transição: é preciso cumprir um pedágio de 17% do tempo que faltava para a aposentadoria até a vigência da reforma. "
+                "Como a regra anterior estipulava o tempo mínimo de 30 anos de serviço para entrar na reserva, o militar ativo deverá cumprir 17% a mais sobre o período que falta para dar entrada na aposentadoria."
+                "Por exemplo, se faltam 5 anos para um militar completar os 30 anos de serviço quando a reforma entrou em vigor, ele terá que cumprir 5 anos + 17% de pedágio (0,85), totalizando 5,85 anos (cerca de 5 anos e 10 meses) para entrar na reforma remunerada.</p>"
                 f"<p><strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
                 f"<strong>Contagem regressiva para a reserva:</strong> {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>"
             )
@@ -58,10 +60,8 @@ def calcular_tempo_servico(data_ingresso, data_lei):
     # Tempo de serviço após a lei
     delta_tempo_servico = datetime.now() - datetime.combine(data_ingresso, datetime.min.time())
     anos = delta_tempo_servico.days / 365.25  # Usar 365.25 para considerar anos bissextos
-    meses_faltantes = (delta_tempo_servico.days % 365.25) / 30.44  # Usar 30.44 para considerar a média de dias por mês
-    meses = int(meses_faltantes)
-    dias_faltantes = (meses_faltantes - meses) * 30.44  # Usar 30.44 para considerar a média de dias por mês
-    dias = int(dias_faltantes)
+    meses = (delta_tempo_servico.days % 365.25) / 30.44  # Usar 30.44 para considerar a média de dias por mês
+    dias = (delta_tempo_servico.days % 365.25) % 30.44  # Usar 30.44 para considerar a média de dias por mês
 
     # Calcular a data futura de reserva remunerada
     data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 30)
@@ -69,17 +69,18 @@ def calcular_tempo_servico(data_ingresso, data_lei):
     # Criar uma contagem regressiva para a futura reserva
     hoje = datetime.now()
     tempo_restante = (data_reserva_remunerada - hoje)
-    dias_restantes = tempo_restante.days
+    percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
+    dias_restantes = int(tempo_restante.days)
     horas_restantes, resto_horas = divmod(tempo_restante.seconds, 3600)
     minutos_restantes, _ = divmod(resto_horas, 60)
 
-    # Exibir resultado dentro de st.write
-    st.write(
-        f"<p><strong>Tempo de serviço após a Lei:</strong> {anos:.2f} anos, {meses:.2f} meses, {dias:.2f} dias. "
-        f"<strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
-        f"<strong>Contagem regressiva para a reserva:</strong> {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>",
-        unsafe_allow_html=True
-    )
+    # Normalizar a porcentagem para um valor entre 0.0 e 1.0
+    normalized_percent_tempo_restante = percent_tempo_restante / 100.0
+
+    # Exibir contagem regressiva para a futura reserva
+    st.markdown("Contagem regressiva para a reserva:")
+    st.progress(normalized_percent_tempo_restante)
+    st.text(f"**{dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.**")
 
     return (
         "<p><strong>Nova regra da reserva remunerada</strong></p>"
@@ -101,7 +102,8 @@ def calcular_tempo_servico(data_ingresso, data_lei):
         "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
         "</ol>"
         "<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
-        f"<p><strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
+        f"<p><strong>Tempo de serviço após a Lei:</strong> {anos:.2f} anos, {meses:.2f} meses, {dias:.2f} dias. "
+        f"<strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
         f"<strong>Contagem regressiva para a reserva:</strong> {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>"
     )
 
@@ -126,8 +128,8 @@ def main():
         "Selecione a data de ingresso e clique no botão 'Calcular' para obter o resultado."
     )
 
-    # Selecionar a data de ingresso com data padrão de 05-02-2001
-    data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", value=date(2001, 2, 5), min_value=date(1990, 1, 1))
+    # Selecionar a data de ingresso
+    data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1990, 1, 1))
 
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
@@ -137,8 +139,7 @@ def main():
         resultado = calcular_tempo_servico(data_ingresso, data_lei)
 
         # Exibir o resultado
-        st.write(resultado, unsafe_allow_html=True)
+        st.markdown(resultado, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
-
