@@ -133,8 +133,7 @@ def main():
         "Este aplicativo calcula o tempo de serviço nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
         "Selecione a data de ingresso e clique no botão 'Calcular' para obter o resultado."
     )
-    st.markdown("---")
-    st.markdown("Desenvolvido por Alex Jorge da Camara Vieira")
+    
     # Selecionar a data de ingresso
     data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1990, 1, 1))
 
@@ -147,6 +146,7 @@ def main():
 
         # Exibir o resultado
         st.markdown(resultado, unsafe_allow_html=True)
-
+    st.markdown("---")
+    st.markdown("Desenvolvido por Alex Jorge da Camara Vieira")
 if __name__ == "__main__":
     main()
