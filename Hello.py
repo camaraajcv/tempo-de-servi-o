@@ -35,24 +35,14 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         )
 
         return (
-            f"<p><strong>Nova regra da reserva remunerada</strong></p>"
-            f"<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
-            f"no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
-            f"<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
-            f"<ol>"
-            f"<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
-            f"seguintes instituições:"
-            f"   <ul>"
-            f"       <li>Academia Militar das Agulhas Negras</li>"
-            f"       <li>Academia da Força Aérea</li>"
-            f"       <li>Escola Naval</li>"
-            f"       <li>Instituto Militar de Engenharia</li>"
-            f"       <li>Instituto Tecnológico de Aeronáutica</li>"
-            f"       <li>Em escola ou centro de formação de oficiais.</li>"
-            f"   </ul>"
-            f"</li>"
-            f"<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
-            f"</ol>"
+                f"<p><strong>Regra de Transição para Reserva Remunerada</strong></p>"
+                f"<p>Se você ingressou no serviço militar até 17/12/2019, uma nova regra de transição foi estabelecida:</p>"
+                f"<p>1. Se já tinha 30 anos de serviço até essa data, você pode solicitar a reserva remunerada a qualquer momento devido ao direito adquirido.</p>"
+                f"<p>2. Caso não tenha completado 30 anos até 17/12/2019, será necessário cumprir o tempo restante para atingir os 30 anos, acrescido de 17%. Desse acréscimo, 25 anos devem ser de atividade militar nas Forças Armadas.</p>"
+                f"<p>Por exemplo, um militar com 20 anos de serviço em 17/12/2019 precisará cumprir mais 10 anos, com acréscimo de 1,7 anos, totalizando 31 anos, 8 meses e 12 dias de serviço para ter direito à reserva remunerada.</p>"
+                f"<p>Assim, se você entrou no serviço militar até 17/12/2019, verifique quanto tempo faltava para completar 30 anos de serviço naquela data. Calcule 17% desse tempo para acrescentá-lo ao período necessário para a reserva remunerada.</p>"
+                f"<p>Para os que ingressarem no serviço militar após 17/12/2019, será obrigatório cumprir 35 anos de serviço para ter direito à reserva remunerada.</p>"
+                f"<p>Quanto aos oficiais formados em instituições específicas e praças, os 25 anos nas Forças Armadas terão um acréscimo de 4 meses a cada ano, a partir de 2021, até atingir 30 anos.</p>"
             
         )
 
@@ -92,24 +82,14 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             )
 
             return (
-                "<p><strong>Nova regra da reserva remunerada</strong></p>"
-                "<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
-                "no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
-                "<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
-                "<ol>"
-                "<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
-                "seguintes instituições:"
-                "   <ul>"
-                "       <li>Academia Militar das Agulhas Negras</li>"
-                "       <li>Academia da Força Aérea</li>"
-                "       <li>Escola Naval</li>"
-                "       <li>Instituto Militar de Engenharia</li>"
-                "       <li>Instituto Tecnológico de Aeronáutica</li>"
-                "       <li>Em escola ou centro de formação de oficiais.</li>"
-                "   </ul>"
-                "</li>"
-                "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
-                "</ol>"
+                f"<p><strong>Regra de Transição para Reserva Remunerada</strong></p>"
+                f"<p>Se você ingressou no serviço militar até 17/12/2019, uma nova regra de transição foi estabelecida:</p>"
+                f"<p>1. Se já tinha 30 anos de serviço até essa data, você pode solicitar a reserva remunerada a qualquer momento devido ao direito adquirido.</p>"
+                f"<p>2. Caso não tenha completado 30 anos até 17/12/2019, será necessário cumprir o tempo restante para atingir os 30 anos, acrescido de 17%. Desse acréscimo, 25 anos devem ser de atividade militar nas Forças Armadas.</p>"
+                f"<p>Por exemplo, um militar com 20 anos de serviço em 17/12/2019 precisará cumprir mais 10 anos, com acréscimo de 1,7 anos, totalizando 31 anos, 8 meses e 12 dias de serviço para ter direito à reserva remunerada.</p>"
+                f"<p>Assim, se você entrou no serviço militar até 17/12/2019, verifique quanto tempo faltava para completar 30 anos de serviço naquela data. Calcule 17% desse tempo para acrescentá-lo ao período necessário para a reserva remunerada.</p>"
+                f"<p>Para os que ingressarem no serviço militar após 17/12/2019, será obrigatório cumprir 35 anos de serviço para ter direito à reserva remunerada.</p>"
+                f"<p>Quanto aos oficiais formados em instituições específicas e praças, os 25 anos nas Forças Armadas terão um acréscimo de 4 meses a cada ano, a partir de 2021, até atingir 30 anos.</p>"
                 
             )
         else:
@@ -146,25 +126,15 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             )
 
             return (
-                "<p><strong>Nova regra da reserva remunerada</strong></p>"
-                "<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
-                "no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
-                "<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
-                "<ol>"
-                "<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
-                "seguintes instituições:"
-                "   <ul>"
-                "       <li>Academia Militar das Agulhas Negras</li>"
-                "       <li>Academia da Força Aérea</li>"
-                "       <li>Escola Naval</li>"
-                "       <li>Instituto Militar de Engenharia</li>"
-                "       <li>Instituto Tecnológico de Aeronáutica</li>"
-                "       <li>Em escola ou centro de formação de oficiais.</li>"
-                "   </ul>"
-                "</li>"
-                "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
-                "</ol>"
-                
+                f"<p><strong>Regra de Transição para Reserva Remunerada</strong></p>"
+                f"<p>Se você ingressou no serviço militar até 17/12/2019, uma nova regra de transição foi estabelecida:</p>"
+                f"<p>1. Se já tinha 30 anos de serviço até essa data, você pode solicitar a reserva remunerada a qualquer momento devido ao direito adquirido.</p>"
+                f"<p>2. Caso não tenha completado 30 anos até 17/12/2019, será necessário cumprir o tempo restante para atingir os 30 anos, acrescido de 17%. Desse acréscimo, 25 anos devem ser de atividade militar nas Forças Armadas.</p>"
+                f"<p>Por exemplo, um militar com 20 anos de serviço em 17/12/2019 precisará cumprir mais 10 anos, com acréscimo de 1,7 anos, totalizando 31 anos, 8 meses e 12 dias de serviço para ter direito à reserva remunerada.</p>"
+                f"<p>Assim, se você entrou no serviço militar até 17/12/2019, verifique quanto tempo faltava para completar 30 anos de serviço naquela data. Calcule 17% desse tempo para acrescentá-lo ao período necessário para a reserva remunerada.</p>"
+                f"<p>Para os que ingressarem no serviço militar após 17/12/2019, será obrigatório cumprir 35 anos de serviço para ter direito à reserva remunerada.</p>"
+                f"<p>Quanto aos oficiais formados em instituições específicas e praças, os 25 anos nas Forças Armadas terão um acréscimo de 4 meses a cada ano, a partir de 2021, até atingir 30 anos.</p>"
+                                
             )
 
 def calcular_data_futura_reserva(data_ingresso, anos_futura_reserva):
@@ -184,11 +154,11 @@ def main():
     initial_sidebar_state="collapsed",
     
 )
-    st.title("Calculadora de Tempo de Serviço nas FFAA")
+    st.title("Calculadora de Tempo para a reserva nas FFAA")
 
     # Adicionar explicação sobre as regras
     st.markdown(
-        "Este aplicativo calcula o tempo de serviço nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
+        "Este aplicativo calcula o tempo para reserva nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
         "Selecione a data de ingresso, informe os anos extras desejados e clique no botão 'Calcular' para obter o resultado."
     )
     
