@@ -9,7 +9,7 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         meses = (delta_tempo_servico.days % 365.25) / 30.44  # Usar 30.44 para considerar a média de dias por mês
         dias = (delta_tempo_servico.days % 365.25) % 30.44  # Usar 30.44 para considerar a média de dias por mês
 
-        # Calcular a data futura de reserva remunerada considerando anos extras
+       # Calcular a data futura de reserva remunerada considerando anos extras
         data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 35) - timedelta(days=365.25 * anos_extras)
 
         # Criar uma contagem regressiva para a futura reserva considerando anos extras
@@ -23,10 +23,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
 
         # Normalizar a porcentagem para um valor entre 0.0 e 1.0
         percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (35 * 365 * 24 * 3600)) * 100)
+        normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
 
-        # Exibir barra de progresso
+        # Exibir barra de progresso invertida
         st.markdown("Contagem regressiva para a reserva:")
-        st.progress(percent_tempo_restante / 100.0)
+        st.progress(normalized_percent_tempo_restante)
 
         # Exibir texto de sucesso
         st.success(
@@ -79,9 +80,9 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             minutos_restantes, _ = divmod(resto_horas, 60)
 
             # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
+            normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
 
-            # Exibir barra de progresso
+            # Exibir barra de progresso invertida
             st.markdown("Contagem regressiva para a reserva:")
             st.progress(normalized_percent_tempo_restante)
 
@@ -133,9 +134,9 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             minutos_restantes, _ = divmod(resto_horas, 60)
 
             # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
+            normalized_percent_tempo_restante = 1.0 - percent_tempo_restante / 100.0  # Inverter a barra
 
-            # Exibir barra de progresso
+            # Exibir barra de progresso invertida
             st.markdown("Contagem regressiva para a reserva:")
             st.progress(normalized_percent_tempo_restante)
 
@@ -196,7 +197,7 @@ def main():
     data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1990, 1, 1))
 
     # Informar anos extras desejados
-    anos_extras = st.number_input("Informe os anos extras que porventura tenha incorporado, seja tempo de serviço averbado ou tempo de Localidade Especial que se tornou tempo de serviço:", min_value=0, max_value=10, step=1, value=0)
+    anos_extras = st.number_input("Informe os anos extras desejados:", min_value=0, max_value=10, step=1, value=0)
 
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
