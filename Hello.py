@@ -203,7 +203,7 @@ def main():
 
     if st.button("Calcular"):
         # Calcular o tempo de serviço
-        resultado = calcular_tempo_servico(data_ingresso, data_lei, anos_extras)
+        resultado = calcular_tempo_servico(data_ingresso, data_lei)
 
         # Exibir o resultado
         st.markdown(resultado, unsafe_allow_html=True)
