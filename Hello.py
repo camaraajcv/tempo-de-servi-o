@@ -1,5 +1,7 @@
 import streamlit as st
 from datetime import datetime, date, timedelta
+# Configuração da página para ocultar a barra lateral
+st.set_page_config(layout="wide", page_title="Seu Aplicativo Streamlit", sidebar="none")
 
 def calcular_tempo_servico(data_ingresso, data_lei):
     # Tempo de serviço antes da lei
