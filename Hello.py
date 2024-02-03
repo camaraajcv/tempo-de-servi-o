@@ -194,7 +194,7 @@ def main():
     )
     
     # Selecionar a data de ingresso
-    data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1990, 1, 1))
+    data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1970, 1, 1))
 
     # Informar anos extras desejados
     anos_extras = st.number_input("Informe os anos extras desejados:", min_value=0, max_value=10, step=1, value=0)
