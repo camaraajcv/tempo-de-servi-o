@@ -17,43 +17,32 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             # Criar uma contagem regressiva para a futura reserva
             hoje = datetime.now()
             tempo_restante = (data_reserva_remunerada - hoje)
-            percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
-            anos_restantes = int(tempo_restante.days / 365.25)
-            meses_restantes = int((tempo_restante.days % 365.25) / 30.44)  # Usar 30.44 para considerar a média de dias por mês
-            dias_restantes = int((tempo_restante.days % 365.25) % 30.44)  # Usar 30.44 para considerar a média de dias por mês
+            dias_restantes = tempo_restante.days
             horas_restantes, resto_horas = divmod(tempo_restante.seconds, 3600)
             minutos_restantes, _ = divmod(resto_horas, 60)
 
-            # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
-
-            # Exibir contagem regressiva para a futura reserva
-            st.markdown("Contagem regressiva para a reserva:")
-            st.progress(normalized_percent_tempo_restante)
-            st.text(f"**{anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.**")
-
             return (
-                "<p><strong>Nova regra da reserva remunerada</strong></p>"
-                "<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
-                "no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
-                "<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
-                "<ol>"
-                "<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
-                "seguintes instituições:"
-                "   <ul>"
-                "       <li>Academia Militar das Agulhas Negras</li>"
-                "       <li>Academia da Força Aérea</li>"
-                "       <li>Escola Naval</li>"
-                "       <li>Instituto Militar de Engenharia</li>"
-                "       <li>Instituto Tecnológico de Aeronáutica</li>"
-                "       <li>Em escola ou centro de formação de oficiais.</li>"
-                "   </ul>"
-                "</li>"
-                "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
-                "</ol>"
-                "<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
+                f"<p><strong>Nova regra da reserva remunerada</strong></p>"
+                f"<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
+                f"no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
+                f"<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
+                f"<ol>"
+                f"<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
+                f"seguintes instituições:"
+                f"   <ul>"
+                f"       <li>Academia Militar das Agulhas Negras</li>"
+                f"       <li>Academia da Força Aérea</li>"
+                f"       <li>Escola Naval</li>"
+                f"       <li>Instituto Militar de Engenharia</li>"
+                f"       <li>Instituto Tecnológico de Aeronáutica</li>"
+                f"       <li>Em escola ou centro de formação de oficiais.</li>"
+                f"   </ul>"
+                f"</li>"
+                f"<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
+                f"</ol>"
+                f"<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
                 f"<p><strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
-                f"<strong>Contagem regressiva para a reserva:</strong> {anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>"
+                f"<strong>Contagem regressiva para a reserva:</strong> {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>"
             )
 
     # Tempo de serviço após a lei
@@ -68,44 +57,33 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
     # Criar uma contagem regressiva para a futura reserva
     hoje = datetime.now()
     tempo_restante = (data_reserva_remunerada - hoje)
-    percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
-    anos_restantes = int(tempo_restante.days / 365.25)
-    meses_restantes = int((tempo_restante.days % 365.25) / 30.44)  # Usar 30.44 para considerar a média de dias por mês
-    dias_restantes = int((tempo_restante.days % 365.25) % 30.44)  # Usar 30.44 para considerar a média de dias por mês
+    dias_restantes = tempo_restante.days
     horas_restantes, resto_horas = divmod(tempo_restante.seconds, 3600)
     minutos_restantes, _ = divmod(resto_horas, 60)
 
-    # Normalizar a porcentagem para um valor entre 0.0 e 1.0
-    normalized_percent_tempo_restante = percent_tempo_restante / 100.0
-
-    # Exibir contagem regressiva para a futura reserva
-    st.markdown("Contagem regressiva para a reserva:")
-    st.progress(normalized_percent_tempo_restante)
-    st.text(f"**{anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.**")
-
     return (
-        "<p><strong>Nova regra da reserva remunerada</strong></p>"
-        "<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
-        "no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
-        "<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
-        "<ol>"
-        "<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
-        "seguintes instituições:"
-        "   <ul>"
-        "       <li>Academia Militar das Agulhas Negras</li>"
-        "       <li>Academia da Força Aérea</li>"
-        "       <li>Escola Naval</li>"
-        "       <li>Instituto Militar de Engenharia</li>"
-        "       <li>Instituto Tecnológico de Aeronáutica</li>"
-        "       <li>Em escola ou centro de formação de oficiais.</li>"
-        "   </ul>"
-        "</li>"
-        "<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
-        "</ol>"
-        "<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
+        f"<p><strong>Nova regra da reserva remunerada</strong></p>"
+        f"<p>Os militares que ingressarem nas Forças Armadas a partir de 17/12/2019 (vigência da reforma) devem cumprir, "
+        f"no mínimo, 35 anos de tempo de serviço para entrar na reserva remunerada.</p>"
+        f"<p>No entanto, para que os 35 anos sejam válidos, é preciso cumprir um dos dois requisitos abaixo:</p>"
+        f"<ol>"
+        f"<li>30 anos de exercício de atividade de natureza militar nas Forças Armadas, para os oficiais formados nas "
+        f"seguintes instituições:"
+        f"   <ul>"
+        f"       <li>Academia Militar das Agulhas Negras</li>"
+        f"       <li>Academia da Força Aérea</li>"
+        f"       <li>Escola Naval</li>"
+        f"       <li>Instituto Militar de Engenharia</li>"
+        f"       <li>Instituto Tecnológico de Aeronáutica</li>"
+        f"       <li>Em escola ou centro de formação de oficiais.</li>"
+        f"   </ul>"
+        f"</li>"
+        f"<li>25 anos de atividade de natureza militar nas Forças Armadas, para militares que não se enquadram nas hipóteses acima.</li>"
+        f"</ol>"
+        f"<p>Ao contrário da nova regra de aposentadorias do trabalhador privado, não é preciso ter uma idade mínima para entrar na reserva remunerada.</p>"
         f"<p><strong>Tempo de serviço após a Lei:</strong> {anos:.2f} anos, {meses:.2f} meses, {dias:.2f} dias. "
         f"<strong>Data futura de reserva remunerada:</strong> {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
-        f"<strong>Contagem regressiva para a reserva:</strong> {anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>"
+        f"<strong>Contagem regressiva para a reserva:</strong> {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.</p>"
     )
 
 def calcular_data_futura_reserva(data_ingresso, anos_futura_reserva):
@@ -122,27 +100,26 @@ def calcular_data_futura_reserva(data_ingresso, anos_futura_reserva):
 
 def main():
     st.set_page_config(
-    page_title="Tempo de Serviço",
-    page_icon="🧊",
-    initial_sidebar_state="collapsed",
-    
-)
+        page_title="Tempo de Serviço",
+        page_icon="🧊",
+        initial_sidebar_state="collapsed",
+    )
     st.title("Calculadora de Tempo de Serviço nas FFAA")
 
     # Adicionar explicação sobre as regras
     st.markdown(
         "Este aplicativo calcula o tempo de serviço nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
-        "Selecione a data de ingresso, insira o número de anos extras (se desejado) e clique no botão 'Calcular' para obter o resultado."
+        "Selecione a data de ingresso e clique no botão 'Calcular' para obter o resultado."
     )
     
     # Selecionar a data de ingresso
     data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1990, 1, 1))
 
-    # Adicionar campo para inserir anos extras
-    anos_extras = st.number_input("Insira o número de anos extras (opcional):", min_value=0, step=1, value=0)
-
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
+
+    # Inserir input para anos extras
+    anos_extras = st.number_input("Informe o número de anos extras a serem adicionados na previsão de tempo para a reserva, caso tenha tempo anterior ao ingresso ou proveniente de localidade especial:", 0.0, 10.0, 0.0)
 
     if st.button("Calcular"):
         # Calcular o tempo de serviço
@@ -150,7 +127,6 @@ def main():
 
         # Exibir o resultado
         st.markdown(resultado, unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown("Desenvolvido por Alex Jorge da Camara Vieira")
+
 if __name__ == "__main__":
     main()
