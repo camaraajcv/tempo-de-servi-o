@@ -89,7 +89,7 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             # Exibir texto de sucesso
             st.success(
                 f"**Data futura de reserva remunerada:** {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
-                f"**Contagem regressiva para a reserva:** {anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos."
+                f"**Progress tempo de serviço para a reserva:** {anos_restantes} anos, {meses_restantes} meses, {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos."
             )
 
             return (
