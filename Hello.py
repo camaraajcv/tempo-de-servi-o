@@ -17,9 +17,21 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
             # Criar uma contagem regressiva para a futura reserva
             hoje = datetime.now()
             tempo_restante = (data_reserva_remunerada - hoje)
-            dias_restantes = tempo_restante.days
+            percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
+            dias_restantes = int(tempo_restante.days)
             horas_restantes, resto_horas = divmod(tempo_restante.seconds, 3600)
             minutos_restantes, _ = divmod(resto_horas, 60)
+
+            # Normalizar a porcentagem para um valor entre 0.0 e 1.0
+            normalized_percent_tempo_restante = percent_tempo_restante / 100.0
+
+            # Exibir barra de progresso
+            st.markdown("Contagem regressiva para a reserva:")
+            st.progress(normalized_percent_tempo_restante)
+
+            # Exibir texto de sucesso
+            st.success(f"**Data futura de reserva remunerada:** {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
+                       f"**Contagem regressiva para a reserva:** {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.")
 
             return (
                 f"<p><strong>Nova regra da reserva remunerada</strong></p>"
@@ -57,9 +69,21 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
     # Criar uma contagem regressiva para a futura reserva
     hoje = datetime.now()
     tempo_restante = (data_reserva_remunerada - hoje)
-    dias_restantes = tempo_restante.days
+    percent_tempo_restante = min(100, (tempo_restante.total_seconds() / (30 * 365 * 24 * 3600)) * 100)  # Limitar a 100%
+    dias_restantes = int(tempo_restante.days)
     horas_restantes, resto_horas = divmod(tempo_restante.seconds, 3600)
     minutos_restantes, _ = divmod(resto_horas, 60)
+
+    # Normalizar a porcentagem para um valor entre 0.0 e 1.0
+    normalized_percent_tempo_restante = percent_tempo_restante / 100.0
+
+    # Exibir barra de progresso
+    st.markdown("Contagem regressiva para a reserva:")
+    st.progress(normalized_percent_tempo_restante)
+
+    # Exibir texto de sucesso
+    st.success(f"**Data futura de reserva remunerada:** {data_reserva_remunerada.strftime('%d/%m/%Y')}. "
+               f"**Contagem regressiva para a reserva:** {dias_restantes} dias, {horas_restantes} horas, {minutos_restantes} minutos.")
 
     return (
         f"<p><strong>Nova regra da reserva remunerada</strong></p>"
@@ -109,17 +133,17 @@ def main():
     # Adicionar explicação sobre as regras
     st.markdown(
         "Este aplicativo calcula o tempo de serviço nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
-        "Selecione a data de ingresso e clique no botão 'Calcular' para obter o resultado."
+        "Selecione a data de ingresso, informe anos extras (se necessário) e clique no botão 'Calcular' para obter o resultado."
     )
-    
+
     # Selecionar a data de ingresso
     data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1990, 1, 1))
 
+    # Adicionar input para anos extras
+    anos_extras = st.number_input("Informe a quantidade de anos extras a serem descontados:", value=0, min_value=0)
+
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
-
-    # Inserir input para anos extras
-    anos_extras = st.number_input("Informe o número de anos extras a serem adicionados na previsão de tempo para a reserva, caso tenha tempo anterior ao ingresso ou proveniente de localidade especial:", 0.0, 10.0, 0.0)
 
     if st.button("Calcular"):
         # Calcular o tempo de serviço
