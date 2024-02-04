@@ -165,7 +165,7 @@ def main():
     "Selecione a data de ingresso, informe os anos extras desejados e os anos completos em localidade especial, e clique no botão 'Calcular' para obter o resultado."
 )
     #Selecionar a data de ingresso
-    data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1970, 1, 1))
+    data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1970, 1, 1),format="DD/MM/YYYY")
 
     # Adicionar checkboxes para indicar se possui tempo extra para averbar e se serviu em localidade especial
     possui_tempo_extra = st.checkbox("Possuo tempo extra para averbar")
