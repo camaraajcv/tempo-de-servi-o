@@ -177,12 +177,12 @@ def main():
     # Se o usuário marcar a checkbox de "Possuo tempo extra para averbar", permitir entrada para anos extras
     anos_extras = 0
     if possui_tempo_extra:
-        anos_extras = st.number_input("Informe os anos extras a serem averbados:", min_value=0, max_value=35, step=1, value=0)
+        anos_extras = st.number_input("Informe os anos extras a serem averbados:", min_value=0, step=1, value=0)
 
     # Se o usuário marcar a checkbox de "Servi em localidade especial", permitir entrada para anos de localidade especial
     anos_localidade_especial = 0
     if serviu_localidade_especial:
-        anos_localidade_especial = st.number_input("Informe os anos completos em localidade especial. Lembrando que o tempo a ser considerado equivale a 1/3 (um terço) para cada período consecutivo ou não de 2 (dois) anos de efetivo serviço passados pelo militar nas guarnições especiais da Categoria A, a partir da vigência da Lei nº 5.774, de 23 de dezembro de 1971.                       (Redação dada pela Lei nº 7.698, de 1988):", min_value=0, max_value=10, step=1, value=0)
+        anos_localidade_especial = st.number_input("Informe os anos completos em localidade especial. Lembrando que o tempo a ser considerado equivale a 1/3 (um terço) para cada período consecutivo ou não de 2 (dois) anos de efetivo serviço passados pelo militar nas guarnições especiais da Categoria A, a partir da vigência da Lei nº 5.774, de 23 de dezembro de 1971.                       (Redação dada pela Lei nº 7.698, de 1988):", value=0)
         st.markdown(
         f"**PORTARIA GM-MD Nº 379, DE 25 DE JANEIRO DE 2022:**" 
         "\n\n"
