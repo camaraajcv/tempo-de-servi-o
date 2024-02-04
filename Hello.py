@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from datetime import datetime, date, timedelta
 
 def calcular_tempo_servico(data_ingresso, data_lei, anos_extras, anos_localidade_especial):
@@ -179,8 +180,40 @@ def main():
     # Se o usuário marcar a checkbox de "Servi em localidade especial", permitir entrada para anos de localidade especial
     anos_localidade_especial = 0
     if serviu_localidade_especial:
-        anos_localidade_especial = st.number_input("Informe os anos completos em localidade especial:", min_value=0, max_value=10, step=1, value=0)
+        anos_localidade_especial = st.number_input("Informe os anos completos em localidade especial. Lembrando que o tempo a ser considerado equivale a 1/3 (um terço) para cada período consecutivo ou não de 2 (dois) anos de efetivo serviço passados pelo militar nas guarnições especiais da Categoria A, a partir da vigência da Lei nº 5.774, de 23 de dezembro de 1971.                       (Redação dada pela Lei nº 7.698, de 1988):", min_value=0, max_value=10, step=1, value=0)
+        st.markdown(
+        f"**PORTARIA GM-MD Nº 379, DE 25 DE JANEIRO DE 2022:**" 
+        "\n\n"
+        f"**Art. 3º** Para efeito desta Portaria, são consideradas localidades especiais de Categoria A as localidades e as vias fluviais e lacustres situadas no território nacional, na região a oeste da linha denominada Alfa que, partindo do litoral, acompanha sucessivamente os limites interestaduais entre Maranhão – Pará, Maranhão – Tocantins, Piauí – Tocantins, Bahia – Tocantins, Goiás – Tocantins, Goiás – Mato Grosso, Goiás – Mato Grosso do Sul, Minas Gerais – Mato Grosso do Sul, São Paulo – Mato Grosso do Sul e Paraná – Mato Grosso do Sul, conforme o mapa constante do Anexo I."
+        "Parágrafo único. Consideram-se também como localidades especiais de Categoria A as regiões do Oceano Atlântico situadas ao norte da latitude 01 00 S, durante todo o ano, ao sul da latitude 24 00 S, no período compreendido entre 1º de julho e 30 de setembro, e as relacionadas na Tabela I do Anexo II desta Portaria **(após o mapa)**."
+        
+                    )
+    
+        st.image("https://www.in.gov.br/documents/68942/376580666/515%2B2022-01-28%2B14220115-1_MD_14220115_001.jpg/88b9f3fb-f840-0fef-149b-433145152843", use_column_width=True)
+        # Criar um DataFrame com os dados da tabela
+        data = {
+            'UF': ['BA', 'ES', 'GO', 'MA', 'MS', 'PE', 'PR', 'RJ', 'RN', 'RS', 'SC', 'SP'],
+            'LOCALIDADES E/OU GUARNIÇÕES NÃO ENQUADRADAS NO ART. 3º': [
+                'Arquipélago de Abrolhos e Caravelas',
+                'Ilha de Trindade',
+                'Aragarças e Porangatu',
+                'Farol Preguiças, Farol Araçagy, Farol Santana, Farol São João e Alcântara',
+                'Aquidauana',
+                'Arquipélago de Fernando de Noronha',
+                'Guaíra e Radiofarol Paranaguá',
+                'Ilha Rasa, Farol de Macaé, Farol de Cabo Frio, Farol de Castelhanos e Radiofarol de São Tomé',
+                'Radiofarol de Calcanhar em Touros e Farol da Ponta do Mel em Areia Branca',
+                'Rio Grande, Tramandaí, Farol de Tramandaí, Radiofarol de Tramandaí, Farol de Cidreira, Radiofarol Chuí, Farol Mostardas, Farol Albardão, Radiofarol Rio Grande e Farol da Barra do Rio Grande em São José do Norte',
+                'Farol de Santa Marta, Radiofarol da Ilha da Paz, Farol da Ilha do Arvoredo e Urubici',
+                'Radiofarol da Ilha da Moela e Farol da Ponta do Boi'
+            ]
+        }
 
+        df = pd.DataFrame(data)
+
+        # Exibir a tabela no Streamlit
+        st.table(df)
+    
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
 
