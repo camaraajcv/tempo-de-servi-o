@@ -177,7 +177,7 @@ def main():
     # Se o usuário marcar a checkbox de "Possuo tempo extra para averbar", permitir entrada para anos extras
     anos_extras = 0
     if possui_tempo_extra:
-        anos_extras = st.number_input("Informe os anos extras a serem averbados:", min_value=0, max_value=10, step=1, value=0)
+        anos_extras = st.number_input("Informe os anos extras a serem averbados:", min_value=0, max_value=35, step=1, value=0)
 
     # Se o usuário marcar a checkbox de "Servi em localidade especial", permitir entrada para anos de localidade especial
     anos_localidade_especial = 0
