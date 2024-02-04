@@ -212,7 +212,7 @@ def main():
         df = pd.DataFrame(data)
 
         # Exibir a tabela no Streamlit
-        st.table(df)
+        df
     
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
