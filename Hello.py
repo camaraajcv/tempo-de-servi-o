@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime, date, timedelta
 
-def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
+def calcular_tempo_servico(data_ingresso, data_lei, anos_extras, anos_localidade_especial):
     if data_ingresso >= datetime.combine(data_lei, datetime.min.time()).date():
         # Tempo de serviço após a lei
         delta_tempo_servico = datetime.now() - datetime.combine(data_ingresso, datetime.min.time())
@@ -9,8 +9,11 @@ def calcular_tempo_servico(data_ingresso, data_lei, anos_extras):
         meses = (delta_tempo_servico.days % 365.25) / 30.44  # Usar 30.44 para considerar a média de dias por mês
         dias = (delta_tempo_servico.days % 365.25) % 30.44  # Usar 30.44 para considerar a média de dias por mês
 
-       # Calcular a data futura de reserva remunerada considerando anos extras
-        data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 35) - timedelta(days=365.25 * anos_extras)
+        #Calcular a data futura de reserva remunerada considerando anos extras e anos de localidade especial
+        anos_extras_total = anos_extras + (anos_localidade_especial // 2) * (2/3)
+        data_reserva_remunerada = calcular_data_futura_reserva(data_ingresso, 35) - timedelta(days=365.25 * anos_extras_total)
+
+      
 
         # Criar uma contagem regressiva para a futura reserva considerando anos extras
         hoje = datetime.now()
@@ -158,22 +161,32 @@ def main():
 
     # Adicionar explicação sobre as regras
     st.markdown(
-        "Este aplicativo calcula o tempo para reserva nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
-        "Selecione a data de ingresso, informe os anos extras desejados e clique no botão 'Calcular' para obter o resultado."
-    )
-    
-    # Selecionar a data de ingresso
+    "Este aplicativo calcula o tempo para reserva nas Forças Armadas conforme as regras estabelecidas pela Lei 13.954/2019. "
+    "Selecione a data de ingresso, informe os anos extras desejados e os anos completos em localidade especial, e clique no botão 'Calcular' para obter o resultado."
+)
+    #Selecionar a data de ingresso
     data_ingresso = st.date_input("Selecione a data de ingresso nas FFAA:", min_value=date(1970, 1, 1))
 
-    # Informar anos extras desejados
-    anos_extras = st.number_input("Informe os anos extras a serem averbados caso possua algum tempo de serviço anterior a data de ingresso:", min_value=0, max_value=10, step=1, value=0)
+    # Adicionar checkboxes para indicar se possui tempo extra para averbar e se serviu em localidade especial
+    possui_tempo_extra = st.checkbox("Possuo tempo extra para averbar")
+    serviu_localidade_especial = st.checkbox("Servi em localidade especial")
+
+    # Se o usuário marcar a checkbox de "Possuo tempo extra para averbar", permitir entrada para anos extras
+    anos_extras = 0
+    if possui_tempo_extra:
+        anos_extras = st.number_input("Informe os anos extras a serem averbados:", min_value=0, max_value=10, step=1, value=0)
+
+    # Se o usuário marcar a checkbox de "Servi em localidade especial", permitir entrada para anos de localidade especial
+    anos_localidade_especial = 0
+    if serviu_localidade_especial:
+        anos_localidade_especial = st.number_input("Informe os anos completos em localidade especial:", min_value=0, max_value=10, step=1, value=0)
 
     # Definir a data da Lei
     data_lei = date(2019, 12, 17)
 
     if st.button("Calcular"):
         # Calcular o tempo de serviço
-        resultado = calcular_tempo_servico(data_ingresso, data_lei, anos_extras)
+        resultado = calcular_tempo_servico(data_ingresso, data_lei, anos_extras, anos_localidade_especial)
 
         # Exibir o resultado
         st.markdown(resultado, unsafe_allow_html=True)
